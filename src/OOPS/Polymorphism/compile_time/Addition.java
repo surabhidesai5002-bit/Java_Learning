@@ -10,6 +10,7 @@ public class Addition {
     }
 
     float add(float a, int b, float c){
+
         return a + b + c;
     }
 }

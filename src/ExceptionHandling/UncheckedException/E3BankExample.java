@@ -1,4 +1,4 @@
-package ExceptionHandling;
+package ExceptionHandling.UncheckedException;
 
 public class E3BankExample {
     public static void main(String[] args) {

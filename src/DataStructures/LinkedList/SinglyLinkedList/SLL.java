@@ -38,26 +38,68 @@ public class SLL {
         temp.next = n;
     }
 
-    //insert at random place
-    void insertAtPos(int val,int pos){
-        Node n=new Node(val);
-        if(pos==1){
-            n.next=head;
-            head=n;
-            return;
+    //get size
+    int getSize(){
+        int size = 0;
+        Node temp = head;
+        while(temp!=null){
+            temp = temp.next;
+            size++;
         }
-        Node temp=head;
-        for(int i=1;i<pos-1 && temp!=null;i++){
-            temp=temp.next;
-        }
-        if(temp==null){
-            System.out.println("Position out of range");
-            return;
-        }
-        n.next=temp.next;
-        temp.next=n;
+        return size;
     }
 
+    //insert at random place
+    void insertAtPos(int val,int pos){
+        int size = getSize();
+        Node n=new Node(val);
+        if(pos < 0 || pos > size){
+            System.out.println("Invalid Position Given");
+        } else if (pos==0) {
+            n.next=head;
+            head=n;
+        }else{
+            Node temp=head;
+            while(--pos>0){
+                temp = temp.next;
+            }
+            n.next=temp.next;
+            temp.next=n;
+        }
+    }
+
+    //delete at Head
+    void deleteAtHead(){
+        if(head==null){
+            System.out.println("Get Lost!");
+            return;
+        }
+        Node toDelete = head;
+        head = head.next;
+        toDelete = null;
+    }
+
+    //delete value
+    void deleteVal(int val){
+        if(head==null){
+            return;
+        }
+        if(head.data ==val){
+            deleteAtHead();
+            return;
+        }
+        Node temp = head;
+        while(temp.next != null && temp.next.data != val){
+            temp = temp.next;
+        }
+        if(temp.next == null){
+            System.out.println("Value not found.");
+            return;
+        }
+        Node toDelete = temp.next;
+        temp.next = temp.next.next;
+        toDelete = null;
+    }
 
     //print
     void display(){
@@ -80,7 +122,15 @@ class Driver{
         sll.insertAtTail(40);
         sll.insertAtTail(50);
         sll.insertAtTail(60);
-        sll.insertAtPos(35,4);
+        sll.insertAtPos(35,3);
+        sll.insertAtPos(35,20);
+        sll.insertAtPos(5,0);
+        sll.insertAtPos(35,-3);
+        sll.display();
+        sll.deleteAtHead();
+        sll.deleteVal(30);
+        sll.display();
+        sll.deleteVal(300);
         sll.display();
     }
 }
